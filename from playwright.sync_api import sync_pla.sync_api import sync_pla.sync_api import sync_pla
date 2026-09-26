@@ -1,0 +1,10 @@
+from playwright.sync_api import sync_playwright
+
+url = "https://service.tesla.com/docs/Cybertruck/BodyRepair/BodyRepairProcedures/en-us/"
+
+with sync_playwright() as p:
+    browser = p.chromium.launch()
+    page = browser.new_page()
+    page.goto(url, wait_until="networkidle")
+    page.pdf(path="Cybertruck_Repair_Manual.pdf", format="A4", print_background=True)
+    browser.close()
